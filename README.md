@@ -16,9 +16,7 @@ microphone reading library -> tts generating library -> virtual microphone
 
 ## how do i build it?
 
-1. have jdk installed
-2. run `./gradlew build` on unix or `.\gradlew build` on windows
-3. look in build/libs/
+good question!
 
 ## how do i use it?
 
