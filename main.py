@@ -2,6 +2,7 @@
 import sys
 import os
 import ctypes
+import stt
 
 from PySide2.QtWidgets import QApplication, QWidget
 from PySide2.QtCore import QFile
