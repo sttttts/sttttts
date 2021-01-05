@@ -9,7 +9,8 @@ r = sr.Recognizer() # adding object for the recognizer
 def listen():
     with sr.Microphone() as source: # making the system default mic as the input source
         print("Say Anything:")
-        audio = r.listen(source=source) # listening to the input
+        tts.speak(words="Say Something")
+        audio = r.listen(source=source, phrase_time_limit=2) # listening to the input
 
         try:
             text = r.recognize_google(audio) # understanding the input
