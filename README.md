@@ -29,3 +29,25 @@ we dont have a good executable or even a set up guide so it will be up to use on
 ### DO YOU HAVE A DISCORD
 
 yes! join [here](https://discord.gg/4Ru6SRasJB)!
+
+## INSTALL GUIDE (WIP)
+
+if you have git installed, good just run
+```git clone https://github.com/sttttts/sttttts/```
+if you dont, you should go get it. it doesnt take long to install
+
+
+now you need to get the dependencies and their dependencies:
+[pyttsx3](https://pypi.org/project/pyttsx3/)
+- [pywin](https://pypi.org/project/pywin/)
+[SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
+- [PyAudio](https://pypi.org/project/PyAudio/)
+[system_hotkey](https://pypi.org/project/system_hotkey/)
+[PySide2](https://pypi.org/project/PySide2/)
+
+or you can run the install.s1 file using powershell **(but if you have python already then use the install.bat)
+
+once everything is done installing, open a command window into the sttttts folder and run
+```py main.py``` and you should be good to go!
+
+***expand this later on when the virtual mic is done
