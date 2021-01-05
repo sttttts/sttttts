@@ -1,0 +1,6 @@
+pyttsx3
+pywin
+SpeechRecognition
+PyAudio
+system_hotkey
+PySide2
