@@ -3,32 +3,30 @@ import sys
 import os
 import ctypes
 import stt
-
-from PySide2.QtWidgets import QApplication, QWidget
-from PySide2.QtCore import QFile
-from PySide2.QtUiTools import QUiLoader
-
+import PySimpleGUI as sg
 
 myappid = 'sttttts.sttttts.sttttts.1' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
+# Define the window's contents
+layout = [
+	[sg.Text("What's your name?")],
+	[sg.Input(key='-INPUT-')],
+	[sg.Text(size=(40,1), key='-OUTPUT-')],
+	[sg.Button('Ok'), sg.Button('Quit')]
+]
 
-class sttttts(QWidget):
-	def __init__(self):
-		super(sttttts,self).__init__()
-		self.load_ui()
+# Create the window
+window = sg.Window('Window Title', layout)
 
-	def load_ui(self):
-		loader = QUiLoader()
-		path = os.path.join(os.path.dirname(__file__), "form.ui")
-		ui_file = QFile(path)
-		ui_file.open(QFile.ReadOnly)
-		loader.load(ui_file, self)
-		ui_file.close()
+# Display and interact with the Window using an Event Loop
+while True:
+	event, values = window.read()
+	# See if user wants to quit or window was closed
+	if event == sg.WINDOW_CLOSED or event == 'Quit':
+		break
+	# Output a message to the window
+	window['-OUTPUT-'].update('Hello ' + values['-INPUT-'] + "! Thanks for trying PySimpleGUI")
 
-
-if __name__ == "__main__":
-	app = QApplication([])
-	widget = sttttts()
-	widget.show()
-	sys.exit(app.exec_())
+# Finish up by removing from the screen
+window.close()
