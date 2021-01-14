@@ -11,9 +11,9 @@ ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 # Define the window's contents
 layout = [
 	[sg.Text("Volume %")],
-	[sg.Slider(range = (0, 100),orientation="h",default_value=70)],
+	[sg.Slider(range = (0, 100),orientation="h",default_value=70,key="-VOLUME-")],
 	[sg.Text("Sensitivity %")],
-	[sg.Slider(range = (0, 100),orientation="h",default_value=80)],
+	[sg.Slider(range = (0, 100),orientation="h",default_value=80,key="-SENSITIVTY-")],
 	[sg.Button('Ok'), sg.Button('Quit')]
 ]
 
@@ -23,6 +23,7 @@ window = sg.Window('sttttts', layout)
 # Display and interact with the Window using an Event Loop
 while True:
 	event, values = window.read()
+	print(values)
 	# See if user wants to quit or window was closed
 	if event == sg.WINDOW_CLOSED or event == 'Quit':
 		break
