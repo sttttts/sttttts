@@ -18,7 +18,7 @@ layout = [
 ]
 
 # Create the window
-window = sg.Window('sttttts', layout)
+window = sg.Window('sttttts', layout,icon="logos\\icon.ico")
 
 # Display and interact with the Window using an Event Loop
 while True:
