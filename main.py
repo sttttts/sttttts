@@ -4,6 +4,7 @@ import os
 import ctypes
 import backend
 import PySimpleGUI as sg
+from system_hotkey import SystemHotkey
 
 myappid = 'sttttts.sttttts.sttttts.1' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
@@ -19,6 +20,9 @@ layout = [
 
 # Create the window
 window = sg.Window('sttttts', layout,icon="logos\\icon.ico")
+
+hk = SystemHotkey()
+hk.register(('control', 'q'), callback=lambda x:backend.main())
 
 # Display and interact with the Window using an Event Loop
 while True:

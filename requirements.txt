@@ -3,4 +3,4 @@ pywin
 SpeechRecognition
 PyAudio
 system_hotkey
-PySide2
+PySimpleGUI

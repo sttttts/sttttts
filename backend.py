@@ -1,5 +1,4 @@
 import speech_recognition as sr
-from system_hotkey import SystemHotkey
 import pyttsx3
 import pyaudio
 import wave
@@ -7,7 +6,7 @@ import wave
 r = sr.Recognizer() # adding object for the recognizer
 engine = pyttsx3.init()
 
-def run():
+def stt():
 
 	# speech to text
 
@@ -20,13 +19,17 @@ def run():
 			print(f'you said "{text}"')
 		except:
 			print("lol i didnt know what you said")
+			return
+		return text
 
+def make_stt_file(text):
 	# text to speech
 	
 	engine.save_to_file(text, 'tts.wav')
 	engine.runAndWait()
 
-	# plaing to VB-Audio Cable Input
+def tts():
+	# playing to VB-Audio Cable Input
 
 	wf = wave.open("tts.wav", 'rb')
 	p = pyaudio.PyAudio()
@@ -50,9 +53,9 @@ def run():
 		speakers.write(data)
 		data = wf.readframes(CHUNK)
 
+def main():
+	make_stt_file(stt())
+	tts()
 
-
-# VVVVVV the part that activates the stt VVVVVV
-
-hk = SystemHotkey()
-hk.register(('control', 'q'), callback=lambda x:run())
+if __name__ == "__main__":
+	main()
