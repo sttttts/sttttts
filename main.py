@@ -2,7 +2,7 @@
 import sys
 import os
 import ctypes
-import stt
+import backend
 import PySimpleGUI as sg
 
 myappid = 'sttttts.sttttts.sttttts.1' # arbitrary string
