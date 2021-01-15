@@ -33,22 +33,22 @@ def run():
 	CHUNK = 182
 
 	discord = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-        channels=wf.getnchannels(),
-        rate=wf.getframerate(),
-        output=True,
-        output_device_index=6)
+		channels=wf.getnchannels(),
+		rate=wf.getframerate(),
+		output=True,
+		output_device_index=6)
 
 	speakers = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-        channels=wf.getnchannels(),
-        rate=wf.getframerate(),
-        output=True)
+		channels=wf.getnchannels(),
+		rate=wf.getframerate(),
+		output=True)
 
 	data = wf.readframes(CHUNK)
 
 	while data != '':
-	    discord.write(data)
-	    speakers.write(data)
-	    data = wf.readframes(CHUNK)
+		discord.write(data)
+		speakers.write(data)
+		data = wf.readframes(CHUNK)
 
 
 
