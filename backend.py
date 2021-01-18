@@ -48,7 +48,7 @@ def tts():
 
 	data = wf.readframes(CHUNK)
 
-	while data != '':
+	while data != b'':
 		discord.write(data)
 		speakers.write(data)
 		data = wf.readframes(CHUNK)
