@@ -6,7 +6,6 @@ import speech_recognition as sr
 
 r = sr.Recognizer() # adding object for the recognizer
 engine = pyttsx3.init()
-mic = sr.Microphone()
 
 def get_io_devices():
 	p = pyaudio.PyAudio()
