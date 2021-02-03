@@ -63,21 +63,24 @@ class sttttts:
 			output=True,
 			output_device_index=self.output_index
 		)
-
-		output2 = p.open(
-			format=p.get_format_from_width(wf.getsampwidth()),
-			channels=wf.getnchannels(),
-			rate=wf.getframerate(),
-			output=True,
-			output_device_index=self.output_index2
-		)
-
 		data = wf.readframes(CHUNK)
+		if(self.output_index2 != None):
+			output2 = p.open(
+				format=p.get_format_from_width(wf.getsampwidth()),
+				channels=wf.getnchannels(),
+				rate=wf.getframerate(),
+				output=True,
+				output_device_index=self.output_index2
+			)
 
-		while data != b'':
-			output1.write(data)
-			output2.write(data)
-			data = wf.readframes(CHUNK)
+			while data != b'':
+				output1.write(data)
+				output2.write(data)
+				data = wf.readframes(CHUNK)
+		else:
+			while data != b'':
+				output1.write(data)
+				data = wf.readframes(CHUNK)
 
 def main(inp,out,inp2 = None):
 	io = sttttts(inp,out,inp2)
