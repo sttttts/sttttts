@@ -2,9 +2,9 @@
 import sys
 import os
 import ctypes
-import backend
-import PySimpleGUI as sg
 from system_hotkey import SystemHotkey
+import PySimpleGUI as sg
+import backend
 
 myappid = 'sttttts.sttttts.sttttts.1' # arbitrary string
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
@@ -12,10 +12,10 @@ ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 # Define the window's contents
 layout = [
-	[sg.Text("Volume %")],
-	[sg.Slider(range = (0, 100),orientation="h",default_value=70,key="-VOLUME-")],
-	[sg.Text("Sensitivity %")],
-	[sg.Slider(range = (0, 100),orientation="h",default_value=80,key="-SENSITIVTY-")],
+	# [sg.Text("Volume %")],
+	# [sg.Slider(range = (0, 100),orientation="h",default_value=70,key="-VOLUME-")],
+	# [sg.Text("Sensitivity %")],
+	# [sg.Slider(range = (0, 100),orientation="h",default_value=80,key="-SENSITIVTY-")],
 	[sg.Text("Input")],
 	[sg.Combo(backend.get_io_devices()[0],readonly=True,default_value=backend.get_io_devices()[0][0],key="-INPUT-")],
 	[sg.Text("Output")],
@@ -24,7 +24,7 @@ layout = [
 # Create the window
 window = sg.Window('sttttts', layout,icon="logos\\icon.ico")
 hk = SystemHotkey()
-hk.register(('control', 'q'), callback=lambda x:backend.main(0,0))
+hk.register(('control', 'q'), callback=lambda x:backend.main(0,4))
 
 # Display and interact with the Window using an Event Loop
 while True:
@@ -34,7 +34,7 @@ while True:
 		break
 	devices = backend.get_io_devices()
 	wanted_input = devices[0].index(values["-INPUT-"])
-	wanted_output = devices[1].index(values["-OUTPUT-"])
+	wanted_output = devices[1].index(values["-OUTPUT-"]) + len(devices[0]) # THIS LINE
 	hk.unregister(('control', 'q'))
 	hk.register(('control', 'q'), callback=lambda x:backend.main(wanted_input,wanted_output))
 # Finish up by removing from the screen

@@ -6,6 +6,7 @@ import speech_recognition as sr
 
 r = sr.Recognizer() # adding object for the recognizer
 engine = pyttsx3.init()
+p = pyaudio.PyAudio()
 
 def get_io_devices():
 	p = pyaudio.PyAudio()
@@ -23,7 +24,7 @@ def get_io_devices():
 
 class sttttts:
 	"""
-	Defines the class that does speech to text, to text to speech.
+	The class that does speech to text, to text to speech.
 	"""
 	def __init__(self,input_index,output_index):
 		self.mic = sr.Microphone(device_index=input_index)
@@ -53,24 +54,27 @@ class sttttts:
 		# playing to VB-Audio Cable Input
 
 		wf = wave.open("tts.wav", 'rb')
-		p = pyaudio.PyAudio()
 		CHUNK = 182
-		discord = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+		discord = p.open(
+			format=p.get_format_from_width(wf.getsampwidth()),
 			channels=wf.getnchannels(),
 			rate=wf.getframerate(),
 			output=True,
-			output_device_index=self.output_index)
+			output_device_index=self.output_index
+		)
 
-		speakers = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-			channels=wf.getnchannels(),
-			rate=wf.getframerate(),
-			output=True)
+		# speakers = p.open(
+		# 	format=p.get_format_from_width(wf.getsampwidth()),
+		# 	channels=wf.getnchannels(),
+		# 	rate=wf.getframerate(),
+		# 	output=True
+		# )
 
 		data = wf.readframes(CHUNK)
 
 		while data != b'':
 			discord.write(data)
-			speakers.write(data)
+			# speakers.write(data)
 			data = wf.readframes(CHUNK)
 
 def main(inp,out):
@@ -79,4 +83,4 @@ def main(inp,out):
 	io.tts()
 
 if __name__ == "__main__":
-	main(0,0)
+	main(0,4)
