@@ -46,6 +46,7 @@ now you need to get the dependencies and their dependencies:
 - [PyAudio](https://pypi.org/project/PyAudio/)
 - [system_hotkey](https://pypi.org/project/system_hotkey/)
 - [PySimpleGUI](https://pypi.org/project/PySimpleGUI/)
+- [pywin32](https://pypi.org/project/pywin32/)
 
 or you can run the install.s1 file using powershell **(but if you have python already then use the install.bat)
 

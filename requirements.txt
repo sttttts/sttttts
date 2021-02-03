@@ -1,5 +1,6 @@
 pyttsx3
 SpeechRecognition
+pywin32
 PyAudio
 system_hotkey
 PySimpleGUI
