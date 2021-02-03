@@ -38,7 +38,10 @@ while True:
 	devices = backend.get_io_devices()
 	wanted_input = devices[0].index(values["-INPUT-"])
 	wanted_output = devices[1].index(values["-OUTPUT-"]) + len(devices[0])
-	wanted_output2 = (["Disabled"] + devices[1]).index(values["-OUTPUT2-"]) + len(devices[0])
+	if values["-OUTPUT2-"] == "Disabled":
+		wanted_output2 = None
+	else:
+		wanted_output2 = devices[1].index(values["-OUTPUT2-"]) + len(devices[0])
 	hk.unregister(('control', 'q'))
 	if wanted_output2 == "Disabled":
 		wanted_output2 = None
