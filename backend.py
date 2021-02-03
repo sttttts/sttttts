@@ -26,9 +26,10 @@ class sttttts:
 	"""
 	The class that does speech to text, to text to speech.
 	"""
-	def __init__(self,input_index,output_index):
+	def __init__(self,input_index,output_index,output_index2):
 		self.mic = sr.Microphone(device_index=input_index)
 		self.output_index = output_index
+		self.output_index2 = output_index2
 	def stt(self):
 
 		# speech to text
@@ -55,7 +56,7 @@ class sttttts:
 
 		wf = wave.open("tts.wav", 'rb')
 		CHUNK = 182
-		discord = p.open(
+		output1 = p.open(
 			format=p.get_format_from_width(wf.getsampwidth()),
 			channels=wf.getnchannels(),
 			rate=wf.getframerate(),
@@ -63,23 +64,27 @@ class sttttts:
 			output_device_index=self.output_index
 		)
 
-		# speakers = p.open(
-		# 	format=p.get_format_from_width(wf.getsampwidth()),
-		# 	channels=wf.getnchannels(),
-		# 	rate=wf.getframerate(),
-		# 	output=True
-		# )
+		output2 = p.open(
+			format=p.get_format_from_width(wf.getsampwidth()),
+			channels=wf.getnchannels(),
+			rate=wf.getframerate(),
+			output=True,
+			output_device_index=self.output_index2
+		)
 
 		data = wf.readframes(CHUNK)
 
 		while data != b'':
-			discord.write(data)
-			# speakers.write(data)
+			output1.write(data)
+			output2.write(data)
 			data = wf.readframes(CHUNK)
 
-def main(inp,out):
-	io = sttttts(inp,out)
-	io.make_stt_file(io.stt())
+def main(inp,out,inp2 = None):
+	io = sttttts(inp,out,inp2)
+	text = io.stt()
+	if text is None:
+		return
+	io.make_stt_file(text)
 	io.tts()
 
 if __name__ == "__main__":

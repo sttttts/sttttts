@@ -19,7 +19,10 @@ layout = [
 	[sg.Text("Input")],
 	[sg.Combo(backend.get_io_devices()[0],readonly=True,default_value=backend.get_io_devices()[0][0],key="-INPUT-")],
 	[sg.Text("Output")],
-	[sg.Combo(backend.get_io_devices()[1],readonly=True,default_value=backend.get_io_devices()[1][0],key="-OUTPUT-")], [sg.Button('Ok'), sg.Button('Quit')]
+	[sg.Combo(backend.get_io_devices()[1],readonly=True,default_value=backend.get_io_devices()[1][0],key="-OUTPUT-")],
+	[sg.Text("Output 2")],
+	[sg.Combo(["Disabled"] + backend.get_io_devices()[1],readonly=True,default_value="Disabled",key="-OUTPUT2-")],
+	[sg.Button('Ok'), sg.Button('Quit')]
 ]
 # Create the window
 window = sg.Window('sttttts', layout,icon="logos\\icon.ico")
@@ -34,8 +37,11 @@ while True:
 		break
 	devices = backend.get_io_devices()
 	wanted_input = devices[0].index(values["-INPUT-"])
-	wanted_output = devices[1].index(values["-OUTPUT-"]) + len(devices[0]) # THIS LINE
+	wanted_output = devices[1].index(values["-OUTPUT-"]) + len(devices[0])
+	wanted_output2 = (["Disabled"] + devices[1]).index(values["-OUTPUT2-"]) + len(devices[0])
 	hk.unregister(('control', 'q'))
-	hk.register(('control', 'q'), callback=lambda x:backend.main(wanted_input,wanted_output))
+	if wanted_output2 == "Disabled":
+		wanted_output2 = None
+	hk.register(('control', 'q'), callback=lambda x:backend.main(wanted_input,wanted_output,wanted_output2))
 # Finish up by removing from the screen
 window.close()
