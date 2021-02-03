@@ -64,7 +64,7 @@ class sttttts:
 			output_device_index=self.output_index
 		)
 		data = wf.readframes(CHUNK)
-		if(self.output_index2 != None):
+		if(self.output_index2 is not None):
 			output2 = p.open(
 				format=p.get_format_from_width(wf.getsampwidth()),
 				channels=wf.getnchannels(),
@@ -82,12 +82,16 @@ class sttttts:
 				output1.write(data)
 				data = wf.readframes(CHUNK)
 
-def main(inp,out,inp2 = None):
-	io = sttttts(inp,out,inp2)
+def main(inp,out,out2 = None):
+	io = sttttts(inp,out,out2)
 	text = io.stt()
 	if text is None:
 		return
 	io.make_stt_file(text)
+	io.tts()
+
+def repeat(out,out2):
+	io = sttttts(0,out,out2)
 	io.tts()
 
 if __name__ == "__main__":

@@ -27,7 +27,8 @@ layout = [
 # Create the window
 window = sg.Window('sttttts', layout,icon="logos\\icon.ico")
 hk = SystemHotkey()
-hk.register(('control', 'q'), callback=lambda x:backend.main(0,4))
+hk.register(('control', 'q'), callback=lambda x:backend.main(None,None,None))
+hk.register(('alt', 'q'), callback=lambda x:backend.repeat(None,None))
 
 # Display and interact with the Window using an Event Loop
 while True:
@@ -43,8 +44,8 @@ while True:
 	else:
 		wanted_output2 = devices[1].index(values["-OUTPUT2-"]) + len(devices[0])
 	hk.unregister(('control', 'q'))
-	if wanted_output2 == "Disabled":
-		wanted_output2 = None
+	hk.unregister(('alt', 'q'))
 	hk.register(('control', 'q'), callback=lambda x:backend.main(wanted_input,wanted_output,wanted_output2))
+	hk.register(('alt', 'q'), callback=lambda x:backend.repeat(wanted_output,wanted_output2))
 # Finish up by removing from the screen
 window.close()
