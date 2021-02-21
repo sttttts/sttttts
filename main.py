@@ -22,6 +22,8 @@ layout = [
 	[sg.Combo(backend.get_io_devices()[1],readonly=True,default_value=backend.get_io_devices()[1][0],key="-OUTPUT-")],
 	[sg.Text("Output 2")],
 	[sg.Combo(["Disabled"] + backend.get_io_devices()[1],readonly=True,default_value="Disabled",key="-OUTPUT2-")],
+	[sg.Text("Say manually")],
+	[sg.Input(key="-MANUAL-"),sg.Button("Say")],
 	[sg.Button('Ok'), sg.Button('Quit')]
 ]
 # Create the window
@@ -43,6 +45,8 @@ while True:
 		wanted_output2 = None
 	else:
 		wanted_output2 = devices[1].index(values["-OUTPUT2-"]) + len(devices[0])
+	if event == 'Say':
+		backend.say(wanted_output,wanted_output2,values["-MANUAL-"])
 	hk.unregister(('control', 'q'))
 	hk.unregister(('alt', 'q'))
 	hk.register(('control', 'q'), callback=lambda x:backend.main(wanted_input,wanted_output,wanted_output2))

@@ -94,5 +94,10 @@ def repeat(out,out2):
 	io = sttttts(0,out,out2)
 	io.tts()
 
+def say(out,out2,words):
+	io = sttttts(0,out,out2)
+	io.make_stt_file(words)
+	io.tts()
+
 if __name__ == "__main__":
 	main(0,4)
